@@ -41,7 +41,7 @@ char ** argv;
 			return (1);
 		}
 	
-		yyretart(f);
+		yyretart(f);	/* make the file an input to flex */
 		yylex();
 		fclose(f);
 
