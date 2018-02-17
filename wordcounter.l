@@ -1,5 +1,7 @@
 /* Declarations */
 
+%option noyywrap	/* disable the default yywrap of flex */
+
 %{
 	int chars = 0;
 	int words = 0;
@@ -17,8 +19,17 @@
 
 /* c code */
 
-main(int argc, chars **argv){
-	yylex();
+main(argc, argv) 
+int args;
+char ** argv;
+{
+	if(argc>1){
+		if(!(yyin = fopen(argv[1],"r"))){    /* reading input into flex yyin */
+			perror(argv[1]);
+			return (1);
+		}
+	}
+
+	yylex(); 	/* call flex main routine to scan the input */
 	printf("%8d%8d%8d\n",lines, words, chars);
-	return 0;
 }
